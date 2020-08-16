@@ -1,6 +1,6 @@
 package com.leetcode.leet114;
 
-import com.leetcode.leet108.TreeNode;
+import com.leetcode.common.TreeNode;
 
 /**
  * 给定一个二叉树，原地将它展开为一个单链表。
