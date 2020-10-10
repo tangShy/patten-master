@@ -10,5 +10,9 @@ public class Main {
 //        System.out.println(runtime.maxMemory());
         int[] a = new int[]{5,4,1,2,3};
         System.out.println(Arrays.toString(a));
+
+        int[] b = a;
+        System.out.println(b.length);
+        System.out.println(Arrays.toString(b));
     }
 }
