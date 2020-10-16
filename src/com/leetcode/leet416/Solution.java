@@ -1,4 +1,4 @@
-package com.leet416;
+package com.leetcode.leet416;
 
 /**
  * 416. 分割等和子集      mid
