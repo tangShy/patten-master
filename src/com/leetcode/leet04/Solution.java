@@ -1,4 +1,4 @@
-package com.leetcode.leet4;
+package com.leetcode.leet04;
 
 /**
  * 4. 寻找两个正序数组的中位数      --hard
