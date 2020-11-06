@@ -1,75 +1,94 @@
 package com.leetcode.leet1356;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 1365. 有多少小于当前数字的数字   --easy
+ * 1356. 根据数字二进制下 1 的数目排序   --mid
  *
- * 给你一个数组 nums，对于其中每个元素 nums[i]，请你统计数组中比它小的所有数字的数目。
+ * 给你一个整数数组 arr 。请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。
  *
- * 换而言之，对于每个 nums[i] 你必须计算出有效的 j 的数量，其中 j 满足 j != i 且 nums[j] < nums[i] 。
+ * 如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。
  *
- * 以数组形式返回答案。
+ * 请你返回排序后的数组。
  *
  *  
  *
  * 示例 1：
  *
- * 输入：nums = [8,1,2,2,3]
- * 输出：[4,0,1,1,3]
- * 解释：
- * 对于 nums[0]=8 存在四个比它小的数字：（1，2，2 和 3）。
- * 对于 nums[1]=1 不存在比它小的数字。
- * 对于 nums[2]=2 存在一个比它小的数字：（1）。
- * 对于 nums[3]=2 存在一个比它小的数字：（1）。
- * 对于 nums[4]=3 存在三个比它小的数字：（1，2 和 2）。
+ * 输入：arr = [0,1,2,3,4,5,6,7,8]
+ * 输出：[0,1,2,4,8,3,5,6,7]
+ * 解释：[0] 是唯一一个有 0 个 1 的数。
+ * [1,2,4,8] 都有 1 个 1 。
+ * [3,5,6] 有 2 个 1 。
+ * [7] 有 3 个 1 。
+ * 按照 1 的个数排序得到的结果数组为 [0,1,2,4,8,3,5,6,7]
  * 示例 2：
  *
- * 输入：nums = [6,5,4,8]
- * 输出：[2,1,0,3]
+ * 输入：arr = [1024,512,256,128,64,32,16,8,4,2,1]
+ * 输出：[1,2,4,8,16,32,64,128,256,512,1024]
+ * 解释：数组中所有整数二进制下都只有 1 个 1 ，所以你需要按照数值大小将它们排序。
  * 示例 3：
  *
- * 输入：nums = [7,7,7,7]
- * 输出：[0,0,0,0]
+ * 输入：arr = [10000,10000]
+ * 输出：[10000,10000]
+ * 示例 4：
+ *
+ * 输入：arr = [2,3,5,7,11,13,17,19]
+ * 输出：[2,3,5,17,7,11,13,19]
+ * 示例 5：
+ *
+ * 输入：arr = [10,100,1000,10000]
+ * 输出：[10,100,10000,1000]
  *  
  *
  * 提示：
  *
- * 2 <= nums.length <= 500
- * 0 <= nums[i] <= 100
+ * 1 <= arr.length <= 500
+ * 0 <= arr[i] <= 10^4
  *
  * 来源：力扣（LeetCode）
- * 链接：https://leetcode-cn.com/problems/how-many-numbers-are-smaller-than-the-current-number
+ * 链接：https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
+
+// ctrl+c
 public class Solution {
-    public int[] smallerNumbersThanCurrent(int[] nums) {
-        int len = nums.length;
-        int[] result = new int[len];
-        for (int i = 0; i < len; i++) {
-            int count = 0;
-            for (int j = 0; j < len; j++) {
-                if (j != i && nums[j] < nums[i]) {
-                    count++;
-                }
-            }
-            result[i] = count;
+    public static int[] sortByBits(int[] arr) {
+        int[] bit = new int[10001];
+        List<Integer> list = new ArrayList<>();
+        for (int x : arr){
+            list.add(x);
+            bit[x] = getBit(x);
         }
-        return result;
+        list.sort((o1, o2) -> {
+            if (bit[o1] != bit[o2]) {
+                return bit[o1] - bit[o2];
+            } else {
+                return o1 - o2;
+            }
+        });
+        for (int i=0; i<arr.length; i++){
+            arr[i] = list.get(i);
+        }
+        return arr;
     }
 
-    //题解：计数排序
-    public int[] smallerNumbersThanCurrent2(int[] nums) {
-        int len = nums.length;
-        int[] cnt = new int[101];
-        for (int i=0; i<len; i++){
-            cnt[nums[i]]++;
+    // 计算x转换成二进制后 1 的个数
+    private static int getBit(int x) {
+        int count = 0;
+        while (x != 0){
+            count += x%2;
+            x /= 2;
         }
-        for (int i=1; i<=100; i++){
-            cnt[i] += cnt[i-1];
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{0,1,2,3,4,5,6,7,8};
+        int[] ints = sortByBits(arr);
+        for (int i : ints){
+            System.out.print(i + ",");
         }
-        int[] ret = new int[len];
-        for (int i=0; i<len; i++){
-            ret[i] = nums[i] == 0 ? 0 : cnt[nums[i] - 1];
-        }
-        return ret;
     }
 }
