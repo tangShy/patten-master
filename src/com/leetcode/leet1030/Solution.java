@@ -1,5 +1,8 @@
 package com.leetcode.leet1030;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * 1030. 距离顺序排列矩阵单元格    --easy
  * <p>
@@ -43,25 +46,22 @@ package com.leetcode.leet1030;
  */
 public class Solution {
 
-    private int i = 0;
-
-    public int[][] allCellsDistOrder(int R, int C, int r0, int c0) {
+    public static int[][] allCellsDistOrder(int R, int C, int r0, int c0) {
         int[][] result = new int[R * C][2];
-        aaa(r0, c0, result, R, C);
+        for (int i=0; i<R; i++) {
+            for (int j=0; j<C; j++) {
+                result[i*C + j] = new int[] {i, j};
+            }
+        }
+        Arrays.sort(result, Comparator.comparingInt(o -> (Math.abs(o[0] - r0) + Math.abs(o[1] - c0))));
+
         return result;
     }
 
-    private void aaa(int a, int b, int[][] result, int R, int C) {
-//        while (0 <= a && a < R && 0 <= b && b < C) {
-//            result[i][0] = a;
-//            result[i][1] = b;
-//            i++;
-//            aaa(a+i, b, result, R, C);
-//            aaa(a-i, b, result, R, C);
-//            aaa(a, b+i, result, R, C);
-//            aaa(a, b-i, result, R, C);
-//            aaa(a+i, b+i, result, R, C);
-//            aaa(a-i, b-i, result, R, C);
-//        }
+    public static void main(String[] args) {
+        int[][] ints = allCellsDistOrder(2, 3, 0, 1);
+        for (int i=0; i<ints.length; i++) {
+            System.out.println(Arrays.toString(ints[i]));
+        }
     }
 }
