@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.leet92;
 
 import com.leetcode.common.ListNode;
 
@@ -33,7 +33,7 @@ import com.leetcode.common.ListNode;
  * 链接：https://leetcode-cn.com/problems/reverse-linked-list-ii
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class leet92 {
+public class Soulution {
     public ListNode reverseBetween(ListNode head, int left, int right) {
          ListNode dummy = new ListNode(0);
          dummy.next = head;
