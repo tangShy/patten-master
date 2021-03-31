@@ -29,7 +29,7 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
+    public static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         List<Integer> temp = new ArrayList<>();
         result.add(temp);
@@ -40,12 +40,23 @@ public class Solution {
         return result;
     }
 
-    private void recursion(int i, List<List<Integer>> result, List<Integer> temp, int[] nums){
+    private static void recursion(int i, List<List<Integer>> result, List<Integer> temp, int[] nums){
         for (; i<nums.length; i++){
             List<Integer> temp_ = new ArrayList<>(temp);
             temp_.add(nums[i]);
             result.add(temp_);
             recursion(i+1, result, temp_, nums);
         }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1,2,3};
+        List<List<Integer>> subsets = subsets(nums);
+        System.out.println(subsets.toString());
+//        List<Integer> temp = new ArrayList<>();
+//        temp.add(1);
+//        temp.add(2);
+//        List<Integer> temp_ = new ArrayList<>(temp);
+//        System.out.println(temp_.toString());
     }
 }
