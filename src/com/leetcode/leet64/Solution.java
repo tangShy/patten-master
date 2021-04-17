@@ -1,4 +1,4 @@
-package com.leetcode.leetcode64;
+package com.leetcode.leet64;
 
 /**
  * 64. 最小路径和

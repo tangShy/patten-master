@@ -1,4 +1,4 @@
-package com.leetcode.leetcode329;
+package com.leetcode.leet329;
 
 /**
  * 329. 矩阵中的最长递增路径--hard

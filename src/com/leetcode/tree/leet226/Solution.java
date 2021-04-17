@@ -1,4 +1,4 @@
-package com.leetcode.leet226;
+package com.leetcode.tree.leet226;
 
 import com.leetcode.common.TreeNode;
 
@@ -36,7 +36,7 @@ import com.leetcode.common.TreeNode;
 public class Solution {
     public TreeNode invertTree(TreeNode root) {
         // 终止条件
-        if (root == null || (root.left == null && root.right == null)){
+        if (root == null){
             return root;
         }
         // 交换左右子树
