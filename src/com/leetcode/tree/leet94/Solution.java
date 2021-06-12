@@ -3,8 +3,6 @@ package com.leetcode.tree.leet94;
 import com.leetcode.common.TreeNode;
 
 import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,27 +33,23 @@ public class Solution {
             return result;
         }
         //法一：递归法
-//        if(root.left == null){
-//            result.add(root.val);
-//        }else {
-//            inorderTraversal(root.left);
-//            result.add(root.val);
-//        }
-//        inorderTraversal(root.right);
-//        return result;
+        inorderTraversal(root.left);
+        result.add(root.val);
+        inorderTraversal(root.right);
+        return result;
 
         //法二：栈
-        Deque<TreeNode> stk = new LinkedList<>();
-        while (root != null || !stk.isEmpty()){
-            while (root != null){
-                stk.push(root);
-                root = root.left;
-            }
-            root = stk.pop();
-            result.add(root.val);
-            root = root.right;
-        }
-        return result;
+//        Deque<TreeNode> stk = new LinkedList<>();
+//        while (root != null || !stk.isEmpty()){
+//            while (root != null){
+//                stk.push(root);
+//                root = root.left;
+//            }
+//            root = stk.pop();
+//            result.add(root.val);
+//            root = root.right;
+//        }
+//        return result;
     }
 
     public static void main(String[] args) {
