@@ -38,8 +38,77 @@ import com.leetcode.common.ListNode;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Solution {
-    public ListNode sortList(ListNode head) {
+    public static ListNode sortList(ListNode head) {
+        return sortList(head, null);
+    }
 
-        return null;
+    private static ListNode sortList(ListNode head, Object tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+
+        ListNode slow = head, fast = head;
+        while (fast != tail) {
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != tail) {
+                fast = fast.next;
+            }
+        }
+        ListNode mid = slow;
+        ListNode list1 = sortList(head, mid);
+        ListNode list2 = sortList(mid, tail);
+        ListNode sorted = merge(list1, list2);
+        // 去重
+        ListNode temp = sorted;
+        while (temp != null && temp.next != null) {
+            if (temp.val == temp.next.val) {
+                temp.next = temp.next.next;
+            }
+            temp = temp.next;
+        }
+        return sorted;
+    }
+
+    // 对两个有序链表进行合并成一个有序链表
+    private static ListNode merge(ListNode list1, ListNode list2) {
+        if (list1 == null) {
+            return list2;
+        }
+        if (list2 == null) {
+            return list1;
+        }
+        if (list1.val <= list2.val) {
+            list1.next = merge(list1.next, list2);
+            return list1;
+        } else {
+            list2.next = merge(list1, list2.next);
+            return list2;
+        }
+    }
+
+    public static void main(String[] args) {
+        ListNode A = new ListNode(3);
+        A.add(2);
+        A.add(1);
+        A.add(4);
+        A.add(5);
+        A.add(5);
+        A.print();
+        System.out.println();
+        System.out.println("================");
+//        ListNode B = new ListNode(9);
+//        B.add(4);
+//        B.add(5);
+//        B.add(6);
+//        B.print();
+//        System.out.println();
+//        System.out.println("================");
+        ListNode listNode = sortList(A);
+        listNode.print();
     }
 }
